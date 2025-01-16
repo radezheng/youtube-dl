@@ -2,6 +2,9 @@ FROM debian:12-slim
 
 ARG phantomjs_version="2.1.1"
 
+#install git in debian
+RUN apt-get update && apt-get install -y git
+
 ENV PATH="/home/abc/.venv/bin:$PATH" \
     PUID="911" \
     PGID="911" \
