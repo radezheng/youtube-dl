@@ -21,7 +21,7 @@ if $youtubedl_args_output_expand; then exec+=" $(grep -Pe '^(--output |-o ).*\$\
 # if $youtubedl_subscriptions; then echo 'https://www.youtube.com/feed/channels' >> '/tmp/urls.temp'; fi
 # if $youtubedl_watchlater; then echo ":ytwatchlater | --playlist-end '-1' --no-playlist-reverse" >> '/tmp/urls.temp'; fi
 if ! $youtubedl_args_format; then exec+=" --format 'ba'"; fi
-if ! $youtubedl_args_download_archive; then exec+=" --download-archive '/config/archive.txt'"; fi
+if ! $youtubedl_args_download_archive; then exec+=" --download-archive '/archive.txt'"; fi
 
 echo $URL
 exec+=" --cookies '/config/cookies.txt'"
