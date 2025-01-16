@@ -3,7 +3,7 @@ FROM debian:12-slim
 ARG phantomjs_version="2.1.1"
 
 #install git in debian
-RUN apt-get update && apt-get install -y git
+
 
 ENV PATH="/home/abc/.venv/bin:$PATH" \
     PUID="911" \
@@ -40,6 +40,7 @@ RUN set -x && \
         python3 \
         python3-venv \
         python3-pip && \
+        git && \
     apt clean && \
     python3 -m venv /home/abc/.venv && \
     /home/abc/.venv/bin/pip --no-cache-dir install -r /app/requirements.txt && \
