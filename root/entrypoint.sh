@@ -4,7 +4,8 @@ echo "[startup] Running init scripts..."
 
 set -x
 echo "--------------Start.sh--------------"
-git clone https://${GitToken}@github.com/radezheng/youtube-dl.git 
+
+cd / && git clone https://${GitToken}@github.com/radezheng/youtube-dl.git  
 
 cp -f /youtube-dl/root/app/youtube-dl/youtube-dl.sh  /app/youtube-dl/youtube-dl.sh
 chmod +x /app/youtube-dl/youtube-dl.sh
