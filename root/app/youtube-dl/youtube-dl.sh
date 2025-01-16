@@ -24,8 +24,8 @@ if ! $youtubedl_args_format; then exec+=" --format 'ba'"; fi
 if ! $youtubedl_args_download_archive; then exec+=" --download-archive '/config/archive.txt'"; fi
 
 echo $URL
-exec+=" $URL"
 exec+=" --cookies '/config/cookies.txt'"
+exec+=" $URL"
 
 echo $exec
 if [ -f '/config/pre-execution.sh' ]
