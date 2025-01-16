@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -x
-ls /config
+ls /config -l
 
 #don't print command
 set +x
@@ -17,7 +17,7 @@ exec="$youtubedl_binary"
 # exec+=" --batch-file '/tmp/urls'"; (cat '/config/channels.txt'; echo '') > '/tmp/urls.temp'
 if $youtubedl_args_verbose; then exec+=" --verbose"; fi
 if $youtubedl_args_output_expand; then exec+=" $(grep -Pe '^(--output |-o ).*\$\(' '/config/args.conf')"; fi
-if [ -f '/config/cookies.txt' ]; then exec+=" --cookies '/config/cookies.txt'"; fi
+# if [ -f '/config/cookies.txt' ]; then exec+=" --cookies '/config/cookies.txt'"; fi
 # if $youtubedl_subscriptions; then echo 'https://www.youtube.com/feed/channels' >> '/tmp/urls.temp'; fi
 # if $youtubedl_watchlater; then echo ":ytwatchlater | --playlist-end '-1' --no-playlist-reverse" >> '/tmp/urls.temp'; fi
 if ! $youtubedl_args_format; then exec+=" --format 'ba'"; fi
@@ -25,6 +25,8 @@ if ! $youtubedl_args_download_archive; then exec+=" --download-archive '/config/
 
 echo $URL
 exec+=" $URL"
+exec+=" --cookies '/config/cookies.txt'"
+
 echo $exec
 if [ -f '/config/pre-execution.sh' ]
 then
