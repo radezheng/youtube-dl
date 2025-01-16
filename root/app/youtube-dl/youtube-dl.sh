@@ -7,16 +7,16 @@ ls /config -l
 set +x
 
 if $youtubedl_debug; then youtubedl_args_verbose=true; else youtubedl_args_verbose=false; fi
-# if grep -qPe '^(--output |-o ).*\$\(' '/config/args.conf'; then youtubedl_args_output_expand=true; else youtubedl_args_output_expand=false; fi
-if grep -qPe '^(--format |-f )' '/config/args.conf'; then youtubedl_args_format=true; else youtubedl_args_format=false; fi
-if grep -qPe '^--download-archive ' '/config/args.conf'; then youtubedl_args_download_archive=true; else youtubedl_args_download_archive=false; fi
+# if grep -qPe '^(--output |-o ).*\$\(' '/youtube-dl/root/args.conf'; then youtubedl_args_output_expand=true; else youtubedl_args_output_expand=false; fi
+if grep -qPe '^(--format |-f )' '/youtube-dl/root/args.conf'; then youtubedl_args_format=true; else youtubedl_args_format=false; fi
+if grep -qPe '^--download-archive ' '/youtube-dl/root/args.conf'; then youtubedl_args_download_archive=true; else youtubedl_args_download_archive=false; fi
 
 youtubedl_binary='yt-dlp'
 exec="$youtubedl_binary"
-# exec+=" --config-location '/config/args.conf'"
+# exec+=" --config-location '/youtube-dl/root/args.conf'"
 # exec+=" --batch-file '/tmp/urls'"; (cat '/config/channels.txt'; echo '') > '/tmp/urls.temp'
 if $youtubedl_args_verbose; then exec+=" --verbose"; fi
-if $youtubedl_args_output_expand; then exec+=" $(grep -Pe '^(--output |-o ).*\$\(' '/config/args.conf')"; fi
+if $youtubedl_args_output_expand; then exec+=" $(grep -Pe '^(--output |-o ).*\$\(' '/youtube-dl/root/args.conf')"; fi
 # if [ -f '/config/cookies.txt' ]; then exec+=" --cookies '/config/cookies.txt'"; fi
 # if $youtubedl_subscriptions; then echo 'https://www.youtube.com/feed/channels' >> '/tmp/urls.temp'; fi
 # if $youtubedl_watchlater; then echo ":ytwatchlater | --playlist-end '-1' --no-playlist-reverse" >> '/tmp/urls.temp'; fi
@@ -25,6 +25,8 @@ if ! $youtubedl_args_download_archive; then exec+=" --download-archive '/config/
 
 echo $URL
 exec+=" --cookies '/config/cookies.txt'"
+exec+=" --write-info-json"
+exec+=" --user-agent 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'"
 exec+=" $URL"
 
 echo $exec
