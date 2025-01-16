@@ -39,7 +39,7 @@ RUN set -x && \
         wget \
         python3 \
         python3-venv \
-        python3-pip && \
+        python3-pip  \
         git && \
     apt clean && \
     python3 -m venv /home/abc/.venv && \
