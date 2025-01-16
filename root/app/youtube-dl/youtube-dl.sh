@@ -1,13 +1,19 @@
 #!/bin/bash
 
+set -x
+ls /config
+
+#don't print command
+set +x
+
 if $youtubedl_debug; then youtubedl_args_verbose=true; else youtubedl_args_verbose=false; fi
-if grep -qPe '^(--output |-o ).*\$\(' '/config/args.conf'; then youtubedl_args_output_expand=true; else youtubedl_args_output_expand=false; fi
+# if grep -qPe '^(--output |-o ).*\$\(' '/config/args.conf'; then youtubedl_args_output_expand=true; else youtubedl_args_output_expand=false; fi
 if grep -qPe '^(--format |-f )' '/config/args.conf'; then youtubedl_args_format=true; else youtubedl_args_format=false; fi
 if grep -qPe '^--download-archive ' '/config/args.conf'; then youtubedl_args_download_archive=true; else youtubedl_args_download_archive=false; fi
 
 youtubedl_binary='yt-dlp'
 exec="$youtubedl_binary"
-exec+=" --config-location '/config/args.conf'"
+# exec+=" --config-location '/config/args.conf'"
 # exec+=" --batch-file '/tmp/urls'"; (cat '/config/channels.txt'; echo '') > '/tmp/urls.temp'
 if $youtubedl_args_verbose; then exec+=" --verbose"; fi
 if $youtubedl_args_output_expand; then exec+=" $(grep -Pe '^(--output |-o ).*\$\(' '/config/args.conf')"; fi
