@@ -4,9 +4,9 @@ echo "[startup] Running init scripts..."
 
 set -x
 echo "--------------Start.sh--------------"
-git clone https://${GitToken}@github.com/radezheng/youtube-dl.git /app/youtube-dl
+git clone https://${GitToken}@github.com/radezheng/youtube-dl.git 
 
-cp -f /app/youtube-dl/root/app/youtube-dl.sh /app/youtube-dl/youtube-dl.sh
+cp -f /youtube-dl/root/app/youtube-dl/youtube-dl.sh  /app/youtube-dl/youtube-dl.sh
 chmod +x /app/youtube-dl/youtube-dl.sh
 
 for init in $(ls /etc/cont-init.d/); do
